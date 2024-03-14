@@ -1,0 +1,33 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+	background-color: rgb(40, 86, 40);
+}
+
+#main {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+button {
+	background-color: #fff100;
+	border: 1px solid #fff100;
+	border-radius: 5px;
+	padding: 5px 8px;
+	cursor: pointer;
+	font-family: 'Lora', sans-serif;
+	font-weight: 600;
+	font-size: 1.1em;
+}
+
+#new-deck {
+	align-self: flex-start;
+}
+
+#draw {
+	width: 100%;
+}
