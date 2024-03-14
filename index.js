@@ -15,14 +15,13 @@ const handleDrawClick = () => {
 	fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`)
 		.then((res) => res.json())
 		.then((data) => {
-			const cardsArr = data.cards;
-
-			for (let card of cardsArr) {
-				const imgUrl = card.image;
-				cardsWrapper.innerHTML += `<img src="${imgUrl}"/>`;
-			}
+			cardsWrapper.children[0].innerHTML = `
+				<img src=${data.cards[0].image} class="card" />
+			`;
+			cardsWrapper.children[1].innerHTML = `
+				<img src=${data.cards[1].image} class="card" />
+			`;
 		});
-	cardsWrapper.innerHTML = '';
 };
 
 newDeckBtn.addEventListener('click', handleNewDeckClick);
