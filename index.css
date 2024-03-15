@@ -5,12 +5,9 @@ body {
 	background-color: rgb(40, 86, 40);
 }
 
-#main {
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
+h2,
+p {
+	color: rgb(235, 235, 235);
 }
 
 button {
@@ -22,6 +19,14 @@ button {
 	font-family: 'Lora', sans-serif;
 	font-weight: 600;
 	font-size: 1.1em;
+}
+
+#main {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
 }
 
 #cards_wrapper {
@@ -53,6 +58,13 @@ button {
 	height: 100%;
 }
 
-h2 {
-	color: rgb(235, 235, 235);
+.btn-text_wrapper {
+	display: flex;
+	align-items: flex-start;
+	align-self: flex-start;
+}
+
+.btn-text_wrapper p {
+	margin-top: 0;
+	margin-left: 10px;
 }

@@ -1,7 +1,8 @@
 const newDeckBtn = document.getElementById('new-deck');
 const drawBtn = document.getElementById('draw');
 const cardsWrapper = document.getElementById('cards_wrapper');
-const textWrapper = document.getElementById('header');
+const headerWrapper = document.getElementById('header');
+const textWrapper = document.getElementById('remaining');
 let deckId;
 
 const handleNewDeckClick = () => {
@@ -9,6 +10,7 @@ const handleNewDeckClick = () => {
 		.then((response) => response.json())
 		.then((data) => {
 			deckId = data.deck_id;
+			textWrapper.textContent = `Available cards: ${data.remaining}`;
 		});
 };
 
@@ -44,6 +46,7 @@ const handleDrawClick = () => {
 	fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`)
 		.then((res) => res.json())
 		.then((data) => {
+			console.log(data);
 			cardsWrapper.children[0].innerHTML = `
 				<img src=${data.cards[0].image} class="card" />
 			`;
@@ -52,7 +55,8 @@ const handleDrawClick = () => {
 			`;
 
 			const winnerText = determineCardWinner(data.cards[0], data.cards[1]);
-			header.textContent = winnerText;
+			headerWrapper.textContent = winnerText;
+			textWrapper.textContent = `Remaining cards: ${data.remaining}`;
 		});
 };
 
