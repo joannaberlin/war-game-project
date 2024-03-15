@@ -1,6 +1,7 @@
 const newDeckBtn = document.getElementById('new-deck');
 const drawBtn = document.getElementById('draw');
 const cardsWrapper = document.getElementById('cards_wrapper');
+const textWrapper = document.getElementById('header');
 let deckId;
 
 const handleNewDeckClick = () => {
@@ -31,11 +32,11 @@ const determineCardWinner = (card1, card2) => {
 	const card2ValueIndex = values.indexOf(card2.value);
 
 	if (card1ValueIndex > card2ValueIndex) {
-		console.log('Card1 wins!');
+		return 'Card 1 wins!';
 	} else if (card1ValueIndex < card2ValueIndex) {
-		console.log('Card2 wins!');
+		return 'Card 2 wins!';
 	} else if (card1ValueIndex === card2ValueIndex) {
-		console.log(`It's a tie!`);
+		return 'War!';
 	}
 };
 
@@ -50,9 +51,8 @@ const handleDrawClick = () => {
 				<img src=${data.cards[1].image} class="card" />
 			`;
 
-			console.log(data.cards);
-
-			determineCardWinner(data.cards[0], data.cards[1]);
+			const winnerText = determineCardWinner(data.cards[0], data.cards[1]);
+			header.textContent = winnerText;
 		});
 };
 
