@@ -52,6 +52,16 @@ const determineCardWinner = (card1, card2) => {
 	}
 };
 
+const determineGameWinner = (scoreYou, scoreComp) => {
+	if (scoreYou > scoreComp) {
+		return 'You won the game!';
+	} else if (scoreYou < scoreComp) {
+		return 'Computer won the game!';
+	} else {
+		return `It's a tie!`;
+	}
+};
+
 const handleDrawClick = () => {
 	fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`)
 		.then((res) => res.json())
@@ -68,7 +78,9 @@ const handleDrawClick = () => {
 			textWrapper.textContent = `Remaining cards: ${data.remaining}`;
 
 			if (data.remaining === 0) {
+				const finalText = determineGameWinner(myScore, computerScore);
 				drawBtn.disabled = true;
+				headerWrapper.textContent = finalText;
 			}
 		});
 };
