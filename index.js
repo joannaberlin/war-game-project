@@ -9,14 +9,13 @@ const textWrapper = document.getElementById('remaining');
 const computerScoreEl = document.getElementById('computer-score');
 const myScoreEl = document.getElementById('my-score');
 
-const handleNewDeckClick = () => {
-	fetch('https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/')
-		.then((response) => response.json())
-		.then((data) => {
-			deckId = data.deck_id;
-			textWrapper.textContent = `Available cards: ${data.remaining}`;
-		});
-
+const handleNewDeckClick = async () => {
+	const res = await fetch(
+		'https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/'
+	);
+	const data = await res.json();
+	deckId = data.deck_id;
+	textWrapper.textContent = `Available cards: ${data.remaining}`;
 	drawBtn.disabled = false;
 };
 
@@ -62,27 +61,27 @@ const determineGameWinner = (scoreYou, scoreComp) => {
 	}
 };
 
-const handleDrawClick = () => {
-	fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`)
-		.then((res) => res.json())
-		.then((data) => {
-			cardsWrapper.children[0].innerHTML = `
+const handleDrawClick = async () => {
+	const res = await fetch(
+		`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`
+	);
+	const data = await res.json();
+	cardsWrapper.children[0].innerHTML = `
 				<img src=${data.cards[0].image} class="card" />
 			`;
-			cardsWrapper.children[1].innerHTML = `
+	cardsWrapper.children[1].innerHTML = `
 				<img src=${data.cards[1].image} class="card" />
 			`;
 
-			const winnerText = determineCardWinner(data.cards[0], data.cards[1]);
-			headerWrapper.textContent = winnerText;
-			textWrapper.textContent = `Remaining cards: ${data.remaining}`;
+	const winnerText = determineCardWinner(data.cards[0], data.cards[1]);
+	headerWrapper.textContent = winnerText;
+	textWrapper.textContent = `Remaining cards: ${data.remaining}`;
 
-			if (data.remaining === 0) {
-				const finalText = determineGameWinner(myScore, computerScore);
-				drawBtn.disabled = true;
-				headerWrapper.textContent = finalText;
-			}
-		});
+	if (data.remaining === 0) {
+		const finalText = determineGameWinner(myScore, computerScore);
+		drawBtn.disabled = true;
+		headerWrapper.textContent = finalText;
+	}
 };
 
 newDeckBtn.addEventListener('click', handleNewDeckClick);
